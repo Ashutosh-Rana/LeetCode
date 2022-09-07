@@ -21,13 +21,13 @@ public:
             return;
         }
         //Row=i--;
-        for(i=Col-cnt-2;i>cnt;i--){
+        for(i=Col-cnt-2;i>=cnt;i--){
             res.push_back(matrix[Row-cnt-1][i]);
         }
         if(res.size()==Col*Row){
             return;
         }
-        for(i=Row-cnt-1;i>=cnt+1;i--){
+        for(i=Row-cnt-2;i>=cnt+1;i--){
             res.push_back(matrix[i][cnt]);
         }
         cnt++;
