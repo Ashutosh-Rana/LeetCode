@@ -6,11 +6,7 @@ public:
         for(int i=0;i<n;i++){
             v.push_back(to_string(nums[i]));
         }
-        sort(begin(v),end(v),[](string& s1,string& s2){ 
-            if(s1+s2>s2+s1){
-                return true;
-            }
-                                                      return false;});
+        sort(begin(v),end(v),[](string& s1,string& s2){return s1+s2>s2+s1; });
         string res;
         for(int i=0;i<n;i++){
             res+=v[i];
