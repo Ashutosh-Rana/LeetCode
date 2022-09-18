@@ -8,19 +8,18 @@ public:
         //     }
         // }
         // return 0;
-        unsigned nums_sum=0,sum=0,n=nums.size();
-        unordered_set<int> s(nums.begin(),nums.end());
-        int n2=n-s.size();
-        for(auto a:s){
-            sum+=a;
+        int slow=nums[0],fast=nums[0];
+        do{
+            slow=nums[slow];  //move 1 step ahead
+            fast=nums[nums[fast]];  //move 2 step ahead
         }
-        for(int i=0;i<n;i++){
-            nums_sum+=nums[i];
-        }
-        if(nums_sum>sum){
-            return (nums_sum-sum)/n2;
-        }
-        return (sum-nums_sum)/n2;
+        while(slow!=fast);
         
+        fast=nums[0];
+        while(slow!=fast){
+            slow=nums[slow]; //move 1 step ahead
+            fast=nums[fast];  //move 1 step ahead
+        } 
+        return slow;
     }
 };
