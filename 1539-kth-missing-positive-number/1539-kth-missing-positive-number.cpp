@@ -27,12 +27,13 @@ public:
                 h=mid-1;
             }
         }
-        if(cnt==k){
-            return arr[mid]-1;
-        }
-        if(cnt<k){
-            return arr[mid]+k-cnt;
-        }
-        return arr[mid]-(cnt-k)-1;
+        return l+k;
+        // if(cnt==k){
+        //     return arr[mid]-1;
+        // }
+        // if(cnt<k){
+        //     return arr[mid]+k-cnt;
+        // }
+        // return arr[mid]-(cnt-k)-1;
     }
 };
