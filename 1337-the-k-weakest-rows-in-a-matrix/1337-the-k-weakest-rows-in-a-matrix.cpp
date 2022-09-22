@@ -4,16 +4,39 @@ public:
         vector<int> v,v2,res;
         int r=mat.size(),c=mat[0].size();
         for(int i=0;i<r;i++){
-            int cnt=0;
-            for(int j=0;j<c;j++){
-                if(mat[i][j]==1){
-                    cnt++;
-                }
-                else{
-                    break;
-                }
+            int l=0,r=c-1,mid;
+            if(mat[i][0]==0){
+                v.push_back(0);
             }
-            v.push_back(cnt);
+            else{
+                while(l<=r){
+                    mid=l+(r-l)/2;
+                    if(mat[i][mid]==1 && ( (mid<c-1 && mat[i][mid+1]==0) 
+                                          || mid==c-1) ){
+                        break;
+                    }
+                    if(mat[i][mid]==1){
+                        l=mid+1;
+                    }
+                    else{
+                        r=mid-1;
+                    }
+                }
+                v.push_back(mid+1);
+            }
+            
+            // for(int j=0;j<c;j++){
+            //     if(mat[i][j]==1){
+            //         cnt++;
+            //     }
+            //     else{
+            //         break;
+            //     }
+            // }
+            // v.push_back(cnt);
+        }
+        for(int i:v){
+            cout<<i<<" ";
         }
         v2=v;
         sort(v2.begin(),v2.end());
