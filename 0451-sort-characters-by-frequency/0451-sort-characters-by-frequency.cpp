@@ -3,8 +3,8 @@ public:
     string frequencySort(string s) {
         string res;
         unordered_map<char,int> mp;
-        for(int i=0;i<s.length();i++){
-            mp[s[i]]++;
+        for(auto c:s){
+            mp[c]++;
         }
         //unordered_map<int,string> freq;
         vector<string> freq(s.size()+1,"");
