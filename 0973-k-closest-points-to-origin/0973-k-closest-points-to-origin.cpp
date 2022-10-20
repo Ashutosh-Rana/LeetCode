@@ -5,7 +5,7 @@ public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         priority_queue<pi,vector<pi>,greater<pi>> pq;
         for(vector<int> p:points){
-            int d=(pow(p[0],2))+(pow(p[1],2));
+            int d=(p[0]*p[0])+(p[1]*p[1]);
             pq.push(make_pair(d,p));
         }
         vector<vector<int>> res(k);
