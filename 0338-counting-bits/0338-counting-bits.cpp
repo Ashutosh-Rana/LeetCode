@@ -21,9 +21,13 @@ public:
         for(int i=1;i<=n;i++){
             int cnt=0;
             int j=i;
+            // while(j){
+            //     j=j&(j-1);
+            //     cnt++;
+            // }
             while(j){
-                j=j&(j-1);
-                cnt++;
+                cnt+=j&1;
+                j=j>>1;
             }
             res[i]=cnt;
         }
