@@ -25,9 +25,13 @@ public:
             //     j=j&(j-1);
             //     cnt++;
             // }
+            // while(j){
+            //     cnt+=j&1;
+            //     j=j>>1;
+            // }
             while(j){
-                cnt+=j&1;
-                j=j>>1;
+                cnt+=j%2;
+                j/=2;
             }
             res[i]=cnt;
         }
