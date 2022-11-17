@@ -43,10 +43,10 @@ class Solution
        for(int j=low;j<high;j++){
            if(arr[j]<pivot){
                i++;
-               swap_ele(&arr[i],&arr[j]);
+               swap(arr[i],arr[j]);
            }
        }
-       swap_ele(&arr[i+1],&arr[high]);
+       swap(arr[i+1],arr[high]);
        return i+1;
     }
 };
