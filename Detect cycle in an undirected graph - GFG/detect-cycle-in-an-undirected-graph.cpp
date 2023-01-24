@@ -5,7 +5,24 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     private:
-        bool detectCycle(int src,int V, vector<int> adj[],vector<int>& vis){
+        bool detectCycle_DFS(int node,int parent,int V, vector<int> adj[],vector<int>& vis){
+            vis[node]=1;
+            for(auto adjacentNode: adj[node]){
+                    if(!vis[adjacentNode]){
+                        //vis[adjacentNode]=1;
+                        if(detectCycle_DFS(adjacentNode,node,V,adj,vis)==true){
+                            return true;
+                        }
+                    }
+                    else if(parent!=adjacentNode){
+                        return true;
+                    }
+            }
+            
+            return false;
+        }
+        
+        bool detectCycle_BFS(int src,int V, vector<int> adj[],vector<int>& vis){
             queue<pair<int,int>> q;
             //vector<int> vis(V,0);
             q.push({src,-1});
@@ -33,7 +50,7 @@ class Solution {
         vector<int> vis(V,0);
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(detectCycle(i,V,adj,vis)){
+                if(detectCycle_DFS(i,-1,V,adj,vis)){
                     return true;
                 }
             }
