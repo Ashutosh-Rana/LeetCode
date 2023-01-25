@@ -1,38 +1,5 @@
 class Solution {
-// private:
-//     void bfs(int r,int c,vector<vector<int>>& mat){
-//         int m=mat.size(),n=mat[0].size();
-//         queue<pair<int,int>> q;
-//         q.push({r,c});
-//         vector<vector<int>> vis(m,vector<int> (n,0));
-//         vis[r][c]=1;
-//         int cnt=0;
-//         while(!q.empty()){
-//             cnt++;
-//             int nr=q.front().first;
-//             int nc=q.front().second;
-//             q.pop();
-//             vector<int> dr={-1,0,1,0};
-//             vector<int> dc={0,1,0,-1};
-//             for(int i=0;i<4;i++){
-//                 int newR=nr+dr[i];
-//                 int newC=nc+dc[i];
-//                 if(newR>=0 && newR<m && newC>=0 && newC<n &&
-//                    !vis[newR][newC] && mat[newR][newC]==0){
-//                     while(!q.empty()){
-//                         q.pop();
-//                     }
-//                     break;
-//                 }
-//                 else if(newR>=0 && newR<m && newC>=0 && newC<n &&
-//                    !vis[newR][newC] && mat[newR][newC]!=0){
-//                     vis[newR][newC]=1;
-//                     q.push({newR,newC});
-//                 }
-//             }
-//         }
-//         mat[r][c]=cnt;
-//     }
+
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
         int m=mat.size(),n=mat[0].size();
