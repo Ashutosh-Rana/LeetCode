@@ -1,6 +1,6 @@
 class Solution {
 private:
-    bool check(int start,int n,vector<vector<int>>& graph,vector<int>& color){
+    bool checkBFS(int start,int n,vector<vector<int>>& graph,vector<int>& color){
         queue<int> q;
         q.push(start);
         color[start]=0;
@@ -19,6 +19,21 @@ private:
         }
         return true;
     }
+    
+    bool checkDFS(int start,int n,vector<vector<int>>& graph,vector<int>& color){
+        for(auto it:graph[start]){
+            if(color[it]==-1){
+                color[it]=1-color[start];
+                if(!checkDFS(it,n,graph,color)){
+                    return false;
+                }
+            }
+            else if(color[it]==color[start]){
+                return false;
+            }
+        }
+        return true;
+    }
 public:
     bool isBipartite(vector<vector<int>>& graph) {
         int n=graph.size();
@@ -26,7 +41,8 @@ public:
         
         for(int i=0;i<n;i++){
             if(color[i]==-1){
-                if(!check(i,n,graph,color)){
+                color[i]=0;
+                if(!checkDFS(i,n,graph,color)){
                     return false;
                 }
             }
