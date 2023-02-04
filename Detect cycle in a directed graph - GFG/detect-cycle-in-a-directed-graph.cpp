@@ -6,16 +6,21 @@ using namespace std;
 class Solution {
   private:
   bool checkCycleDFS(int i,vector<int>& vis,vector<int>& pathVis,vector<int> adj[]){
-      if(vis[i] && pathVis[i]){
-          return true;
-      }
-      if(vis[i] && !pathVis[i]){
-          return false;
-      }
+    //   if(vis[i] && pathVis[i]){
+    //       return true;
+    //   }
+    //   if(vis[i] && !pathVis[i]){
+    //       return false;
+    //   }
       vis[i]=1;
       pathVis[i]=1;
       for(auto node:adj[i]){
-          if(checkCycleDFS(node,vis,pathVis,adj)){
+          if(!vis[node]){
+              if(checkCycleDFS(node,vis,pathVis,adj)){
+                    return true;
+               }
+          }
+          else if(pathVis[node]){
               return true;
           }
       }
