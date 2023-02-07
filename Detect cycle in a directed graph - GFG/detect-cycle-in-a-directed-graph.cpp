@@ -27,19 +27,48 @@ class Solution {
       pathVis[i]=0;
       return false;
   }
+  void checkCycleBFS(queue<int> q,vector<int> indegree,vector<int>& topo,vector<int> adj[]){
+      while(!q.empty()){
+          int node=q.front();
+          topo.push_back(node);
+          q.pop();
+          for(auto it:adj[node]){
+              indegree[it]--;
+              if(!indegree[it]){
+                  q.push(it);
+              }
+          }
+      }
+  }
   public:
     // Function to detect cycle in a directed graph.
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
-        vector<int> vis(V,0),pathVis(V,0);
+        // vector<int> vis(V,0),pathVis(V,0);
+        // for(int i=0;i<V;i++){
+        //     if(!vis[i]){
+        //         if(checkCycleDFS(i,vis,pathVis,adj)){
+        //             return true;
+        //         }
+        //     }
+        // }
+        queue<int> q;
+        vector<int> indegree(V,0),topo;
         for(int i=0;i<V;i++){
-            if(!vis[i]){
-                if(checkCycleDFS(i,vis,pathVis,adj)){
-                    return true;
-                }
+            for(auto it:adj[i]){
+                indegree[it]++;
             }
         }
-        return false;
+        for(int i=0;i<V;i++){
+            if(!indegree[i]){
+                q.push(i);
+            }
+        }
+        checkCycleBFS(q,indegree,topo,adj);
+        if(topo.size()==V){
+            return false;
+        }
+        return true;
     }
 };
 
