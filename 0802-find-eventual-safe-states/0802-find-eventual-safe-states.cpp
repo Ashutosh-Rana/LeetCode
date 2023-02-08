@@ -17,20 +17,51 @@ private:
     check[node]=1;
     return false;
 }
+    
+void bfsCheck(queue<int>& q,vector<int> graph_rev[],vector<int> indegree,vector<int>& res){
+    while(!q.empty()){
+        int node=q.front();
+        res.push_back(node);
+        q.pop();
+        for(auto it:graph_rev[node]){
+            indegree[it]--;
+            if(!indegree[it]){
+                q.push(it);
+            }
+        }
+    }
+}
+    
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int V=graph.size();
-        vector<int> vis(V,0),pathVis(V,0),check(V,0),safe_nodes;
+        // vector<int> vis(V,0),pathVis(V,0),check(V,0),safe_nodes;
+        // for(int i=0;i<V;i++){
+        //     if(!vis[i]){
+        //         dfsCheck(i,vis,pathVis,check,graph);
+        //     }
+        // }
+        // for(int i=0;i<V;i++){
+        //     if(check[i]){
+        //         safe_nodes.push_back(i);
+        //     }
+        // }
+        // return safe_nodes;
+        queue<int> q;
+        vector<int> res,graph_rev[V],indegree(V,0);
         for(int i=0;i<V;i++){
-            if(!vis[i]){
-                dfsCheck(i,vis,pathVis,check,graph);
+            for(auto it:graph[i]){
+                graph_rev[it].push_back(i);
+                indegree[i]++;
             }
         }
         for(int i=0;i<V;i++){
-            if(check[i]){
-                safe_nodes.push_back(i);
+            if(!indegree[i]){
+                q.push(i);
             }
         }
-        return safe_nodes;
+        bfsCheck(q,graph_rev,indegree,res);
+        sort(res.begin(),res.end());
+        return res;
     }
 };
