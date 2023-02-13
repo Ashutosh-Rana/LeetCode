@@ -11,23 +11,46 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        // vector<int> dist(V,1e9);
+        // dist[S]=0;
+        // pq.push({0,S});
+        // while(!pq.empty()){
+        //     int node=pq.top().second;
+        //     //int wt=pq.top().first;
+        //     pq.pop();
+        //     for(auto it:adj[node]){
+        //         int adj_node=it[0];
+        //         int adj_wt=it[1];
+        //         if(dist[node]+adj_wt<dist[adj_node]){
+        //             dist[adj_node]=dist[node]+adj_wt;
+        //             pq.push({adj_wt,adj_node});
+        //         }
+        //     }
+        // }
+        
+        set<pair<int,int>> st;
         vector<int> dist(V,1e9);
         dist[S]=0;
-        pq.push({0,S});
-        while(!pq.empty()){
-            int node=pq.top().second;
-            //int wt=pq.top().first;
-            pq.pop();
-            for(auto it:adj[node]){
-                int adj_node=it[0];
-                int adj_wt=it[1];
-                if(dist[node]+adj_wt<dist[adj_node]){
-                    dist[adj_node]=dist[node]+adj_wt;
-                    pq.push({adj_wt,adj_node});
+        st.insert({0,S});
+        while(!st.empty()){
+            auto it=*(st.begin());
+            int node=it.second;
+            int dis=it.first;
+            st.erase(it);
+            for(auto i:adj[node]){
+                int adj_node=i[0];
+                int wt=i[1];
+                if(dist[node]+wt<dist[adj_node]){
+                    if(dist[adj_node]!=1e9){
+                        st.erase({dist[adj_node],adj_node});
+                    }
+                    dist[adj_node]=dist[node]+wt;
+                    st.insert({dist[adj_node],adj_node});
                 }
             }
         }
+        
         return dist;
     }
 };
