@@ -9,7 +9,7 @@ public:
             adj[roads[i][1]].push_back({roads[i][0],roads[i][2]});
         }
         priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<pair<ll,ll>>> pq;
-        vector<long long> count(n,0);
+        vector<int> count(n,0);
         vector<long long> dist(n,LONG_MAX);
         pq.push({0,0});
         count[0]=1;
@@ -29,12 +29,12 @@ public:
             for(auto it:adj[node]){
                 int adj_node=it.first;
                 long long adj_wt=it.second;
-                if(dist[adj_node]>dis+adj_wt){
+                if(dis+adj_wt<dist[adj_node]){
                     dist[adj_node]=dis+adj_wt;
                     pq.push({dis+adj_wt,adj_node});
                     count[adj_node]=count[node];
                 }
-                else if(dist[adj_node]==dis+adj_wt ){
+                else if(dis+adj_wt==dist[adj_node] ){
                     count[adj_node]=(count[adj_node]+count[node])%mod;
                     
                 }
