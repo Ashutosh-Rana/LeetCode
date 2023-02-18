@@ -23,9 +23,9 @@ public:
             // if(node==n-1){
             //     continue;
             // }
-            if(dis<dist[node]){
-                continue;
-            }
+            // if(dis<dist[node]){
+            //     continue;
+            // }
             for(auto it:adj[node]){
                 int adj_node=it.first;
                 long long adj_wt=it.second;
