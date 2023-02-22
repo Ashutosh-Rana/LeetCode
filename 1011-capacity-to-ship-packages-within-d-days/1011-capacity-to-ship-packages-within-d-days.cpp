@@ -18,10 +18,6 @@ public:
                     cnt++;
                     temp_sum==mid? temp_sum=0 : temp_sum=weights[i]  ;
                 }
-                // else if(temp_sum==mid){
-                //     cnt++;
-                //     temp_
-                // }
             }
             //cout<<l<<" "<<r<<" "<<" "<<cnt<<endl;
             if(temp_sum){
