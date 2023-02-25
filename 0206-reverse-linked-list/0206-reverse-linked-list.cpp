@@ -16,8 +16,9 @@ class Solution {
         }
         ListNode* newHead=Reverse(head->next);
         ListNode* headNext=head->next;
-        headNext->next=head;
+        // headNext->next=head;
         head->next=NULL;
+        headNext->next=head;
         return newHead;
     }
 public:
