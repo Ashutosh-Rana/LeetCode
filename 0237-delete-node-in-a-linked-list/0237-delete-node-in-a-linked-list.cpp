@@ -22,5 +22,6 @@ public:
     void deleteNode(ListNode* node) {
         ListNode* nextNode=node->next;
         *node=*nextNode;
+        delete nextNode;
     }
 };
