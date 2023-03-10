@@ -10,21 +10,31 @@
  */
 class Solution {
     private:
-        // ListNode* newHead;
-        vector<int> v;
+        ListNode* newHead;
+        // vector<int> v;
 public:
     
     Solution(ListNode* head) {
-        // newHead=head;
-        while(head){
-            v.push_back(head->val);
-            head=head->next;
-        }
+        newHead=head;
+        // while(head){
+        //     v.push_back(head->val);
+        //     head=head->next;
+        // }
     }
     
     int getRandom() {
-        int rand_val=rand()%(v.size());
-        return v[rand_val];
+        // int rand_val=rand()%(v.size());
+        // return v[rand_val];
+        ListNode* cur=newHead;
+        int i=1,ans;
+        while(cur){
+            if(rand()%i==0){
+                ans=cur->val;
+            }
+            i++;
+            cur=cur->next;
+        }
+        return ans;
     }
 };
 
