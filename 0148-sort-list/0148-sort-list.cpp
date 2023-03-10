@@ -30,7 +30,10 @@ private:
         if(l2){
             cur->next=l2;
         }
-        return res->next;
+        ListNode* result=res->next;
+        // delete(cur);
+        delete(res);
+        return result;
     }
 public:
     ListNode* sortList(ListNode* head) {
