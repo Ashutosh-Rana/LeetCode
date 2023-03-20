@@ -5,16 +5,16 @@ public:
         if(n==0){
             return true;
         }
-        if(sz==1 ){
-            if(n<=1 && flowerbed[0]==0){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
+        // if(sz==1 ){
+        //     if(n<=1 && flowerbed[0]==0){
+        //         return true;
+        //     }
+        //     else{
+        //         return false;
+        //     }
+        // }
         for(int i=0;i<sz;i++){
-            cout<<i<<" "<<sz<<endl;
+            // cout<<i<<" "<<sz<<endl;
             if(i==0 or i==sz-1){
                 if(i==0 && flowerbed[i]==0 && i+1<sz && flowerbed[i+1]==0){
                     cnt++;
@@ -23,6 +23,9 @@ public:
                 else if(i==sz-1 && flowerbed[i]==0 && i-1>0 && flowerbed[i-1]==0){
                     cnt++;
                     flowerbed[i]=1;
+                }
+                else if(sz==1 && n<=1 && flowerbed[0]==0){
+                    return true;
                 }
             }
             else{
