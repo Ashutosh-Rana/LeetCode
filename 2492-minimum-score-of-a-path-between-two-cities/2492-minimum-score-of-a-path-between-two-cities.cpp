@@ -1,9 +1,9 @@
 class Solution {
 private: 
     void dfs(int node,vector<pair<int,int>> adj[],vector<int> &vis){
-    // if(vis[node]){
-    //     return;
-    // }
+    if(vis[node]){
+        return;
+    }
     vis[node]=1;
     for(auto it:adj[node]){
         int dest=it.first,d=it.second;
