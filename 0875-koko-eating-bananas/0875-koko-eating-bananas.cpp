@@ -1,8 +1,14 @@
 class Solution {
 public:
     int minEatingSpeed(vector<int>& piles, int h) {
-        sort(piles.begin(),piles.end());
-        int l=1,n=piles.size(),r=piles[n-1];
+        // sort(piles.begin(),piles.end());
+        
+        int l=1,n=piles.size(),r=0;
+        
+        for(int i=0;i<n;i++){
+            r=max(r,piles[i]);
+        }
+        
         if(n==1){
             return ceil(piles[0]/double(h));
         }
