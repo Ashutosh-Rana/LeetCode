@@ -4,21 +4,18 @@ public:
         stack<char> st;
         st.push(s[0]);
         for(int i=1;i<s.size();i++){
-            if(st.empty()){
+            // cout<<s[i]<<" "<<st.size()<<endl;
+            if(s[i]=='(' or s[i]=='{' or s[i]=='['){
                 st.push(s[i]);
             }
-            // char c=st.top();
-            else if( (st.top()=='(' && s[i]==')') 
-                    or (st.top()=='{' && s[i]=='}') or (st.top()=='[' && s[i]==']') ){
-                st.pop(); 
+            else if( st.size()!=0 && ((s[i]==')' and st.top()=='(') or (s[i]=='}' and st.top()=='{') or (s[i]==']' and st.top()=='[')) ){
+                // cout<<s[i]<<' '<<st.size()<<endl;
+                st.pop();
             }
             else{
-                st.push(s[i]);
+                return false;
             }
         }
-        if(st.empty()){
-            return true;
-        }
-        return false;
+        return st.empty() ? true : false;
     }
 };
