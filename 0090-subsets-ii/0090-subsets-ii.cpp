@@ -7,10 +7,11 @@ private:
         }
         res.push_back(v);
         for(int i=start;i<nums.size();i++){
-            v.push_back(nums[i]);
-            if(find(res.begin(),res.end(),v)==res.end()){
-                backtrack(i+1,v,nums);
+            if(i>start && nums[i]==nums[i-1]){
+                continue;
             }
+            v.push_back(nums[i]);
+            backtrack(i+1,v,nums);
             v.pop_back();
         }
     }
