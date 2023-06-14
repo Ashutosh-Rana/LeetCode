@@ -10,31 +10,36 @@
  * };
  */
 class Solution {
-    // int res=INT_MAX;
+    int res=INT_MAX;
+    TreeNode *prev=NULL;
 private:
-    void dfs(TreeNode* root,vector<int>& v){
+    void dfs(TreeNode* root){
        if(!root){
            return;
-       } 
-        // v.push_back(root->val);
-        // if(root->left){
-        //     res=min(res,abs(root->val-root->left->val));
-        // }
-        // if(root->right){
-        //     res=min(res,abs(root->val-root->right->val));
-        // }
-        dfs(root->left,v);
-        v.push_back(root->val);
-        dfs(root->right,v);
+       }
+        dfs(root->left);
+        if(prev){
+            res=min(res,root->val-prev->val);
+        }
+        prev=root;
+        dfs(root->right);
     }
+    // void dfs(TreeNode* root,vector<int>& v){
+    //    if(!root){
+    //        return;
+    //    }
+    //     dfs(root->left,v);
+    //     v.push_back(root->val);
+    //     dfs(root->right,v);
+    // }
 public:
     int getMinimumDifference(TreeNode* root) {
-        vector<int> v;
-        dfs(root,v);
-        int res=INT_MAX;
-        for(int i=1;i<v.size();i++){
-            res=min(res,v[i]-v[i-1]);
-        }
+        // vector<int> v;
+        dfs(root);
+        // int res=INT_MAX;
+        // for(int i=1;i<v.size();i++){
+        //     res=min(res,v[i]-v[i-1]);
+        // }
         return res;
     }
 };
