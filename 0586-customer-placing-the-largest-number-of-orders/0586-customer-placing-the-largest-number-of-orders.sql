@@ -5,7 +5,7 @@ from (
     from Orders o
     group by o.customer_number
     having cnt=(
-        select max(c)
+        select max(t.c)
         from (select count(*) as "c" from Orders group by customer_number) t
         )
     # order by cnt desc limit 1
