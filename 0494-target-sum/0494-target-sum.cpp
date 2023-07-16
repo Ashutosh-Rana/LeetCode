@@ -1,83 +1,40 @@
-// class Solution {
-//     int dfs(int i,int &sum,int target,vector<int> nums,
-//             map<pair<int,int>,int> &dp){
-//         // cout<<"hi"<<endl;
-//         if(i==nums.size() && sum==target){
-//             // res++;
-//             return 1;
-//         }
-//         if(i>=nums.size()){
-//             return 0;
-//         }
-//         if(dp[{i,sum}]){
-//             return dp[{i,sum}];
-//         }
-//         sum=sum+nums[i];
-//         // i++;
-//         int pos=dfs(i+1,sum,target,nums,dp);
-//         // i--;
-//         sum=sum-2*nums[i];
-//         // i++;
-//         int neg=dfs(i+1,sum,target,nums,dp);
-//         // i--;
-//         sum+=nums[i];
-//         // cout<<i<<" "<<pos+neg<<endl;
-//         dp[{i,sum}]=pos+neg;
-//         return dp[{i,sum}];
-        
-//     }
-// public:
-//     int findTargetSumWays(vector<int>& nums, int target) {
-//         int res=0,sum=0,i=0;
-//         map<pair<int,int>,int> dp;
-//         res=dfs(i,sum,target,nums,dp);
-//         return res;
-//     }
-// };
-
-
 class Solution {
-public:
-    
-        
-    /*
-        1, 1, 1, 1, 1
-        +  +  +  +  + 
-        +  +  +  +  -
-        +  +  +  -  -
-        +  +  +  -  +
-        +  +  -  -  -
-        +  +  -  +  -
-    */
-    
-    int n;
-    int target;
-    map<pair<int,int>,int> cache;
-    int DFS(vector<int>& nums,int currSum, int i)
-    {
-        auto find = cache.find({i,currSum});
-        
-        if (find != cache.end())
-            return find->second;
-        
-        if (i == n && currSum == target)
-        {
+    int n,targt;
+    map<pair<int,int>,int> dp;
+    int dfs(int i,int &sum,vector<int> &nums){
+        // cout<<"hi"<<endl;
+        auto it=dp.find({i,sum});
+        if(it!=dp.end()){
+            return dp[{i,sum}];
+        }
+        if(i==n && sum==targt){
+            // res++;
             return 1;
         }
-        if(i >= n)
+        if(i>=n){
             return 0;
-
-        return cache[{i,currSum}] = DFS(nums,currSum + nums[i],i + 1) + DFS(nums,currSum - nums[i],i + 1);
+        }
+        sum=sum+nums[i];
+        // i++;
+        int pos=dfs(i+1,sum,nums);
+        // i--;
+        sum=sum-2*nums[i];
+        // i++;
+        int neg=dfs(i+1,sum,nums);
+        // i--;
+        sum+=nums[i];
+        // cout<<i<<" "<<pos+neg<<endl;
+        dp[{i,sum}]=pos+neg;
+        return dp[{i,sum}];
+        
     }
-    
-    int findTargetSumWays(vector<int>& nums, int S) 
-    {
-        n = nums.size();
-        target = S;
-        
-        if(n == 0)
-            return 0;
-        
-        return DFS(nums,0,0);
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        // int res=0,sum=0,i=nums.size()-1;
+        // map<pair<int,int>,int> dp;
+        int sum=0;
+        n=nums.size(),targt=target;
+        int res=dfs(0,sum,nums);
+        return res;
     }
 };
