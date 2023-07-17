@@ -21,30 +21,58 @@ class Solution {
     }
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *l1_rev=reverse(l1);
-        ListNode *l2_rev=reverse(l2);
+        // ListNode *l1_rev=reverse(l1);
+        // ListNode *l2_rev=reverse(l2);
+        stack<int> st1,st2;
+        while(l1){
+            st1.push(l1->val);
+            l1=l1->next;
+        }
+        while(l2){
+            st2.push(l2->val);
+            l2=l2->next;
+        }
         ListNode *res=new ListNode(0);
         // cout<<l1_rev->val<<" "<<l2_rev->val<<endl;
         ListNode *cur=res;
         int carry=0,sum=0;
-        while(l1_rev or l2_rev){
-            // int sum;
-            if(l1_rev && l2_rev){
-                // cout<<"Hi"<<endl;
-                sum=l1_rev->val+l2_rev->val+carry;
-                // cout<<sum<<endl;
-                l1_rev=l1_rev->next;
-                l2_rev=l2_rev->next;
+        // while(l1_rev or l2_rev){
+        //     // int sum;
+        //     if(l1_rev && l2_rev){
+        //         // cout<<"Hi"<<endl;
+        //         sum=l1_rev->val+l2_rev->val+carry;
+        //         // cout<<sum<<endl;
+        //         l1_rev=l1_rev->next;
+        //         l2_rev=l2_rev->next;
+        //     }
+        //     else if(l1_rev){
+        //         sum=l1_rev->val+carry;
+        //         l1_rev=l1_rev->next;
+        //     }
+        //     else{
+        //         sum=l2_rev->val+carry;
+        //         l2_rev=l2_rev->next;
+        //     }
+        //     // cout<<sum<<endl;
+        //     carry=sum/10;
+        //     sum%=10;
+        //     ListNode* tmp=new ListNode(sum);
+        //     cur->next=tmp;
+        //     cur=cur->next;
+        // }
+        while(!st1.empty() or !st2.empty()){
+            if(st1.size() && st2.size()){
+                sum=st1.top()+st2.top()+carry;
+                st1.pop(),st2.pop();
             }
-            else if(l1_rev){
-                sum=l1_rev->val+carry;
-                l1_rev=l1_rev->next;
+            else if(st1.size()){
+                sum=st1.top()+carry;
+                st1.pop();
             }
             else{
-                sum=l2_rev->val+carry;
-                l2_rev=l2_rev->next;
+                sum=st2.top()+carry;
+                st2.pop();
             }
-            // cout<<sum<<endl;
             carry=sum/10;
             sum%=10;
             ListNode* tmp=new ListNode(sum);
