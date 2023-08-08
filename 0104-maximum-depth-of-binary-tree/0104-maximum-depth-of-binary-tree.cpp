@@ -10,18 +10,18 @@
  * };
  */
 class Solution {
-private:
-    int dfs(TreeNode* root,int cnt){
+    int res=0;
+    void dfs(TreeNode* root,int cnt){
+        res=max(res,cnt);
         if(!root){
-            return cnt;
+            return;
         }
-        int maxLeft=dfs(root->left,cnt+1);
-        int maxRight=dfs(root->right,cnt+1);
-        return max(maxLeft,maxRight);
+        dfs(root->left,cnt+1);
+        dfs(root->right,cnt+1);
     }
 public:
     int maxDepth(TreeNode* root) {
-        int res=dfs(root,0);
+        dfs(root,0);
         return res;
     }
 };
