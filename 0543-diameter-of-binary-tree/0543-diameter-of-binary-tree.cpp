@@ -10,21 +10,29 @@
  * };
  */
 class Solution {
-private:
-    int dfs(TreeNode* root,int &res){
-        if(!root){
-            return -1;
+    int res=0;
+    void dfs(TreeNode* root){
+        if(root){
+            res=max(res,maxLen(root->left)+maxLen(root->right));
         }
-        int leftMax=dfs(root->left,res);
-        int rightMax=dfs(root->right,res);
-        // cout<<root->val<<' '<<leftMax<<" "<<rightMax<<endl;
-        res=max(res,2+leftMax+rightMax);
-        return 1+max(leftMax,rightMax);
+        else{
+            return;
+        }
+        dfs(root->left);
+        dfs(root->right);
+    }
+    int maxLen(TreeNode* root){
+        // res=max(res,cnt);
+        if(!root){
+            return 0;
+        }
+        int l=maxLen(root->left);
+        int r=maxLen(root->right);
+        return max(l+1,r+1);
     }
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        int res=0;
-        dfs(root,res);
+        dfs(root);
         return res;
     }
 };
