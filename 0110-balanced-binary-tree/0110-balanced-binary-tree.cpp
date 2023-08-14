@@ -12,7 +12,7 @@
 class Solution {
     int flag=0,res=1;
     int dfs(TreeNode* root){
-        // if(flag) return res;
+        if(flag) return res;
         if(!root){
             return -1;
         }
