@@ -10,25 +10,23 @@
  * };
  */
 class Solution {
-    int dfs(TreeNode* root,int &flag){
+    int flag=0,res=1;
+    int dfs(TreeNode* root){
+        // if(flag) return res;
         if(!root){
             return -1;
         }
-        if(flag){
-            return 0;
-        }
-        int leftMax=1+dfs(root->left,flag);
-        int rightMax=1+dfs(root->right,flag);
-        if(abs(leftMax-rightMax)>1){
+        int leftH=1+dfs(root->left);
+        int rightH=1+dfs(root->right);
+        if(abs(leftH-rightH)>1){
             flag=1;
-            return 0;
+            res=0;
         }
-        return max(leftMax,rightMax);
+        return max(leftH,rightH);
     }
 public:
     bool isBalanced(TreeNode* root) {
-        int flag=0;
-        dfs(root,flag);
-        return flag? false:true;
+        dfs(root);
+        return res;
     }
 };
