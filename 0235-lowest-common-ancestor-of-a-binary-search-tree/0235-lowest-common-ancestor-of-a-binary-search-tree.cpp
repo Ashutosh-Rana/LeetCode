@@ -9,34 +9,26 @@
  */
 
 class Solution {
-private:
-    bool dfs(TreeNode* root, TreeNode* p, TreeNode* q,int &res){
-        if(!root){
-            return false;
+    TreeNode* dfs(TreeNode* root,TreeNode* p, TreeNode* q){
+        // cout<<root->val<<endl;
+        if(
+            (p->val<root->val && q->val>root->val) or
+           (p->val>root->val && q->val<root->val) or
+            (p->val==root->val or q->val==root->val)
+          )
+        {
+            return root;    
         }
-        if( (p->val<root->val && q->val>root->val) or (p->val>root->val && q->val<root->val) 
-           or p->val==root->val or q->val==root->val ){
-            res=root->val;
-            return true;
+        if(p->val<root->val && q->val<root->val){
+            return dfs(root->left,p,q);
         }
-        else if((p->val<root->val && q->val<root->val)){
-            if(dfs(root->left,p,q,res)){
-                // res=root->val;
-                return true;
-            }
+        if(p->val>root->val && q->val>root->val){
+            return dfs(root->right,p,q);
         }
-        else if( p->val>root->val && q->val>root->val ){
-            if(dfs(root->right,p,q,res)){
-                return true;
-            }
-        }
-        return false;
-    }    
+        return root;
+    }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        int res=0;
-        dfs(root,p,q,res);
-        TreeNode* ans=new TreeNode(res);
-        return ans;
+        return dfs(root,p,q);
     }
 };
