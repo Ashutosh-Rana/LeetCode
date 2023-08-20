@@ -1,30 +1,32 @@
 class Solution {
-    void dfs(int idx,int caller,vector<vector<int>> &adjList,vector<vector<int>> &outgoing,vector<bool> &visited,int &ans){
-        visited[idx]=true;
-        if(caller!=-1){     //if the city number is not 0
-            //check if there is an outgoing edge from current node to it's parent node (who called dfs on this node)
-            //if there is no outgoing edge, we'll have to reorient this edge
-            if(find(outgoing[idx].begin(),outgoing[idx].end(),caller)==outgoing[idx].end())
-                ans++;
+    int res=0;
+private:
+    void dfs(int node,int caller,vector<int> adj[],
+             map<pair<int,int>,int> &mp,vector<int> &vis){
+        vis[node]=1;
+        if(caller!=-1){
+            if(!mp[{node,caller}]){
+                res++;
+            } 
         }
-        for(auto i: adjList[idx]){
-            if(!visited[i]){
-                dfs(i,idx,adjList,outgoing,visited,ans);
+        for(int adj_node:adj[node]){
+            if(!vis[adj_node]){
+                dfs(adj_node,node,adj,mp,vis);
             }
         }
- }
+    }
 public:
     int minReorder(int n, vector<vector<int>>& connections) {
-        int ans=0;
-        vector<vector<int>> adjList(n);     //doesn't cares about direction
-        vector<vector<int>> outgoing(n);    //list of outgoing nodes from a node
-        vector<bool> visited(n,false);       
-        for(auto i: connections){
-            adjList[i[0]].push_back(i[1]);
-            adjList[i[1]].push_back(i[0]);
-            outgoing[i[0]].push_back(i[1]);
+        int m=connections.size();
+        vector<int> adj[n],vis(n,0);
+        map<pair<int,int>,int> mp;
+        for(int i=0;i<m;i++){
+            int u=connections[i][0],v=connections[i][1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+            mp[{u,v}]=1;
         }
-        dfs(0,-1,adjList,outgoing,visited,ans);     //start dfs from node 0 
-        return ans;
- }
+        dfs(0,-1,adj,mp,vis);
+        return res;
+    }
 };
