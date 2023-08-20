@@ -1,17 +1,13 @@
 class Solution {
     int res=0;
 private:
-    void dfs(int node,int caller,vector<int> adj[],
+    void dfs(int node,vector<int> adj[],
              map<pair<int,int>,int> &mp,vector<int> &vis){
         vis[node]=1;
-        if(caller!=-1){
-            if(!mp[{node,caller}]){
-                res++;
-            } 
-        }
         for(int adj_node:adj[node]){
             if(!vis[adj_node]){
-                dfs(adj_node,node,adj,mp,vis);
+                if(mp[{node,adj_node}]) res++;
+                dfs(adj_node,adj,mp,vis);
             }
         }
     }
@@ -26,7 +22,7 @@ public:
             adj[v].push_back(u);
             mp[{u,v}]=1;
         }
-        dfs(0,-1,adj,mp,vis);
+        dfs(0,adj,mp,vis);
         return res;
     }
 };
