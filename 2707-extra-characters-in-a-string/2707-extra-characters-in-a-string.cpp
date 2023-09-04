@@ -1,5 +1,5 @@
 class Solution {
-    int recur(unordered_map<string,int> &mp,int idx,string s,vector<int> &dp){
+    int recur(unordered_map<string,int> &mp,int idx,string &s,vector<int> &dp){
         if(idx>=s.size()) return 0;
         if(dp[idx]!=-1) return dp[idx];
         string curStr="";
