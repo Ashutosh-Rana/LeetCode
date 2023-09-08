@@ -10,24 +10,17 @@
  * };
  */
 class Solution {
+    void dfs(TreeNode* root,int &k,priority_queue<int> &pq){
+        if(!root) return;
+        pq.push(root->val);
+        if(pq.size()>k) pq.pop();
+        dfs(root->left,k,pq);
+        dfs(root->right,k,pq);
+    }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> st;
-        // st.push(root);
-        // TreeNode* prev=NULL;
-        while(root || !st.empty()){
-            while(root){
-                st.push(root);
-                root=root->left;
-            }
-            root=st.top();
-            st.pop();
-            k--;
-            if(!k){
-                return root->val;
-            }
-            root=root->right;
-        }
-        return root->val;
+        priority_queue<int> pq;
+        dfs(root,k,pq);
+        return pq.top();
     }
 };
