@@ -9,10 +9,10 @@ class Solution {
             return dp[target];
         } 
         int res=0;
-        // int prev=-1;
+        int prev=-1;
         for(int j=0;j<nums.size();j++){
-            // if(nums[j]==prev) continue;
-            // prev=nums[j];
+            if(nums[j]==prev) continue;
+            prev=nums[j];
             if(target-nums[j]<0) break;
             res+=recur(nums,target-nums[j],dp);
         }
