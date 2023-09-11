@@ -2,11 +2,9 @@ class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
         unordered_map<int,vector<int>> mp;
-        unordered_map<int,int> mp2;
         int n=groupSizes.size();
         for(int i=0;i<n;i++){
             mp[groupSizes[i]].push_back(i);
-            mp2[groupSizes[i]]++;
         }
         vector<vector<int>> res;
         for(auto it=mp.begin();it!=mp.end();it++){
