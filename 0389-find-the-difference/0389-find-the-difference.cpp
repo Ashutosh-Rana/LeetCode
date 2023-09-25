@@ -1,18 +1,12 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        unordered_map<char,int> mp1,mp2;
-        for(char c:s){
-            mp1[c]++;
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        int n=s.size();
+        for(int i=0;i<n;i++){
+            if(s[i]!=t[i]) return t[i];
         }
-        for(char c:t){
-            mp2[c]++;
-        }
-        for(char c:t){
-            if(mp1[c]!=mp2[c]){
-                return c;
-            }
-        }
-        return ' ';
+        return t[n];
     }
 };
