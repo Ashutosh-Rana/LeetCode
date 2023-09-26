@@ -15,19 +15,17 @@ public:
                 mp[s[i]]--;
                 continue;
             }
-                if(s[i]<st.top()){
-                    // char c=st.top();
-                    while(!st.empty() && mp[st.top()]>0 && st.top()>s[i]){
-                        char c=st.top();
-                        st.pop();
-                        // mp[c]--;
-                        vis[c]=0;
-                    }
+            if(s[i]<st.top()){
+                // char c=st.top();
+                while(!st.empty() && mp[st.top()]>0 && st.top()>s[i]){
+                    char c=st.top();
+                    st.pop();
+                    // mp[c]--;
+                    vis[c]=0;
                 }
-            if(!vis[s[i]]){
-                st.push(s[i]);
-                vis[s[i]]=1;
-            }
+            }    
+            st.push(s[i]);
+            vis[s[i]]=1;
             mp[s[i]]--;
         }
         while(!st.empty()){
